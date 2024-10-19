@@ -1,0 +1,9 @@
+.link {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  padding: 10px;
+  color: #000;
+  font-size: 16px;
+  /* margin-left: 26px; */
+}

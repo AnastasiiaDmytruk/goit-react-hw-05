@@ -1,0 +1,14 @@
+.nav {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.link {
+  color: black;
+  font-size: 30px;
+  padding: 20px;
+  transition: all cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+a.active {
+  color: red;
+}
