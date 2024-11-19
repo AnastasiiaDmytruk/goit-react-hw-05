@@ -2,14 +2,14 @@ import { useEffect, useRef } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 
+import MovieCast from "./components/MovieCast/MovieCast";
+import MovieReviews from "./components/MovieReviews/MovieReviews";
 import Navigation from "./components/Navigation/Navigation";
 
 import HomePage from "./pages/HomePage/HomePage";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import MovieDetailsPage from "./pages/MovieDetailsPage/MovieDetailsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import MovieCast from "./components/MovieCast/MovieCast";
-import MovieReviews from "./components/MovieReviews/MovieReviews";
 
 function App() {
   // const navigate = useNavigate();

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
 import styles from "./HomePage.module.css";
 
-import MovieList from "../MovieList/MovieList";
+import { useEffect, useState } from "react";
+
+import MovieList from "../../components/MovieList/MovieList";
 import { getMovies } from "../../api/movies";
 
 const HomePage = () => {
@@ -15,7 +16,6 @@ const HomePage = () => {
     const fetchMovies = async () => {
       if (!query) return;
       setLoading(true);
-
       try {
         const data = await getMovies({ limit: 10 });
         setMovies(data.results);
