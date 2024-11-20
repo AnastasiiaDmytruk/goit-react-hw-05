@@ -31,7 +31,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <MovieList />
+      <MovieList movies={movies}/>
     </div>
   );
 };

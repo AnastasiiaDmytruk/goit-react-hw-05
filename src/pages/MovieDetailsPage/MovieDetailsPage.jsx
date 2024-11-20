@@ -1,7 +1,7 @@
 import styles from "./MovieDetailsPage.module.css";
 import { IoIosArrowDropleft } from "react-icons/io";
 
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { getMovieById } from "../../api/movies";
 import { useEffect, useRef, useState } from "react";
 import MovieCast from "../../components/MovieCast/MovieCast";
@@ -11,6 +11,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   console.log({ movieId });
 
+
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,6 +19,8 @@ const MovieDetailsPage = () => {
   const location = useLocation();
   // console.log(location);
   const backLink = useRef(location.state && "/");
+
+  const navigate= useNavigate();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -36,14 +39,17 @@ const MovieDetailsPage = () => {
     fetchMovie();
   }, [movieId]);
 
+
   return (
     <div>
       {movie&&(
         <div></div>
         )}
-      <Link to={backLink.current}>GoBack</Link>
-      <Link to={`cast`}>Cast</Link>
-      <Link to={`reviews`}>Reviews</Link>
+      {/* <Link to={backLink.current}>GoBack</Link>  */}
+
+      <Link state= {{from: location.state.from}} to={`cast`}>Cast</Link>
+      <Link state= {{from: location.state.from}} to={`reviews`}>Reviews</Link>
+      <Outlet/>
     </div>
   );
 };
