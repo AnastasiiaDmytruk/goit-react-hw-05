@@ -7,33 +7,35 @@ import MovieList from "../../components/MovieList/MovieList";
 import { useEffect, useState } from "react";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import { searchMovies } from "../../api/movies";
+import Loader from "../../components/Loader/Loader";
 
 const MoviesPage = () => {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  
   const [searchParams, setSearchParams] = useSearchParams();
   // 2 :зчитуємо значення рядка запиту;  за допомогою метода get дістаємо  з обєкта searchParams (який ми оновили ф-цією  при onSubmit)
   const query = searchParams.get("query");
 
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!query) {
+    if (!query) 
       return;
-    }
-    const asyncWrapper = async () => {
+
+    const fetchMovies = async () => {
       try {
         setLoading(true);
         setError(null);
         const requestData = await searchMovies(query);
-        setMovies(requestData);
+        setMovies(requestData.results);
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-    asyncWrapper();
+    fetchMovies();
   }, [query]);// 3: встановлюємо значення URL в масив залежностей
 
   // Ця функція буде передана до SearchForm
@@ -44,15 +46,10 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <NavLink className={styles.link} to="/">
-        <IoIosArrowDropleft />
-        Go Back
-      </NavLink>
-      {/* Передаємо функцію обробки сабміту */}
       <SearchForm onSubmit={onSubmit} />
-      {loading && <p>Loading...</p>}
+      {loading && <Loader/>}
       {error && <p>{error.message}</p>}
-      <MovieList movies={movies} />
+      {movies.length > 0 && <MovieList movies={movies} />}
 
     </div>
   );

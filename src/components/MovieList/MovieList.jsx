@@ -9,13 +9,14 @@ const MovieList = ({ movies }) => {
           return(
           <li key={movie.id}>
             <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-              {movie.title} 
+              {movie.title}
             </Link>
           </li>
         );
         })}
       </ul>
     </div>
+
   );
 };
 
