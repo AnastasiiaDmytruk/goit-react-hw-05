@@ -1,3 +1,4 @@
+import styles from "./SearchForm.module.css"
 const SearchForm = ({ onSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -7,14 +8,16 @@ const SearchForm = ({ onSubmit }) => {
 
   return (
     // Встановлюємо обробник події для форми, який буде викликатися при надсиланні форми
+    <div className={styles.wrapper}>
     <form onSubmit={handleSubmit}>
       <input
-        // className={styles.select}
+        className={styles.input}
         type="text"
         name="searchedMovie" // Назва поля, за допомогою якої ми звертаємося до значення у формі
         required></input>
-      <button type="submit">Search</button>
+      <button className={styles.button} type="submit">Search</button>
     </form>
+    </div>
   );
 };
 

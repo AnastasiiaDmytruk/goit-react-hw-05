@@ -38,8 +38,8 @@ const MovieDetailsPage = () => {
 
   return (
     <div className={styles.pageWrapper}>
-      <div>
-        <Link to={backLink.current}>GoBack</Link>
+      <div className={styles.goBack}>
+        <Link  to={backLink.current}>GoBack</Link>
       </div>
       {loading && <Loader />}
       {error && <p>{error.message}</p>}
@@ -66,7 +66,7 @@ const MovieDetailsPage = () => {
               <p> {movie.genres.map((genre) => genre.name).join(", ")}</p>
             </div>
           </div>
-          <div >
+          <div className={styles.additionalInfoWrapper} >
             <h3>Additional Information</h3>
             <div className={styles.linkContainer}>
             <Link  to={`cast`}

@@ -1,6 +1,22 @@
 .pageWrapper {
   padding: 20px;
 }
+
+.goBack{
+  display: inline-block;
+  border: 1px solid black;
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+
+}
+.goBack a{
+  color: black;
+}
+.goBack  :hover{
+  color: red;
+}
+
 .link {
   display: flex;
   gap: 2px;
@@ -8,7 +24,7 @@
   padding: 10px;
   color: #000;
   font-size: 16px;
-  /* margin-left: 26px; */
+
 }
 .wrapper {
   display: flex;
@@ -25,7 +41,15 @@
   font-size: 16px;
   padding: 5px 0;
   transition: color 0.3s;
+
 }
-/* .linkContainera:hover {
-  color: #0056b3;      
-} */
+
+
+
+.additionalInfoWrapper{
+ 
+  padding: 20px;
+  margin-top: 20px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}

@@ -36,7 +36,8 @@ const MovieCast = () => {
       {cast!==null ? (
         <ul>
           {cast.map((item) => (
-            <li key={item.it}>
+            <li key={item.cast_id}
+            style={{ listStyleType: 'none', marginBottom: '15px' }}>
               <img
                 src={
                   item.profile_path
@@ -55,7 +56,7 @@ const MovieCast = () => {
           ))}
         </ul>
       ) : (
-        <p>No Information</p>
+        <p>No cast Information available</p>
       )}
     </div>
   );
