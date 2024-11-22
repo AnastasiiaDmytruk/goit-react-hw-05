@@ -1,28 +1,23 @@
-import { useEffect, useRef } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import MovieCast from "./components/MovieCast/MovieCast";
-import MovieReviews from "./components/MovieReviews/MovieReviews";
-import Navigation from "./components/Navigation/Navigation";
-
-import HomePage from "./pages/HomePage/HomePage";
-import MoviesPage from "./pages/MoviesPage/MoviesPage";
-import MovieDetailsPage from "./pages/MovieDetailsPage/MovieDetailsPage";
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const MovieDetailsPage = lazy(() =>
+  import("./pages/MovieDetailsPage/MovieDetailsPage")
+);
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("./components/MovieReviews/MovieReviews")
+);
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-
+import Navigation from "./components/Navigation/Navigation";
 function App() {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   navigate("/"); // після  оновлення сторінки ми завжди будемо повертатись до Home page бо вказали: ("/")
-  // }, []);
-
   return (
-    <div>
+    <header>
       <Navigation />
-
-      <div>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />
@@ -32,8 +27,8 @@ function App() {
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </div>
-    </div>
+      </Suspense>
+    </header>
   );
 }
 
