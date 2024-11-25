@@ -1,10 +1,12 @@
 import axios from "axios";
 
+const token =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNzczZjMxYzUxOWE4NWRlZWZjZjk4NDRiYTkyODY0NCIsIm5iZiI6MTczMjUzOTAyOS4zNTU0NjA2LCJzdWIiOiI2NzEyMTNkYjA5N2MzZDc3NjBmODkyMDkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.3SJOxqJauN7mqB54DDC3-atC40laFRijqkFEw5U9oOo";
+
 const moviesInstance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
   headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNzczZjMxYzUxOWE4NWRlZWZjZjk4NDRiYTkyODY0NCIsIm5iZiI6MTcyOTM2MTI2My41NDYyOTEsInN1YiI6IjY3MTIxM2RiMDk3YzNkNzc2MGY4OTIwOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Jhv-3-pGoLRBR2po7y-F9le-qmW9UrQ0D4HuhlcRUpM",
+    Authorization: `Bearer ${token}`,
   },
   params: {
     include_adult: false,
@@ -12,10 +14,12 @@ const moviesInstance = axios.create({
   },
 });
 
-export const getTrendingMovies = async  (time_window = 'week') => {
-  const { data } = await moviesInstance.get(`trending//movie/${time_window}`, { params:{
-    page:1,
-  } });
+export const getTrendingMovies = async (time_window = "week") => {
+  const { data } = await moviesInstance.get(`trending/movie/${time_window}`, {
+    params: {
+      page: 1,
+    },
+  });
   return data;
 };
 
@@ -23,24 +27,22 @@ export const searchMovies = async (query) => {
   const { data } = await moviesInstance.get("/search/movie", {
     params: {
       query,
-      page:1,
+      page: 1,
     },
   });
   return data;
 };
 
-export const getMovieById = async (movieId) => {
-  const { data } = await moviesInstance.get(`/movie/${movieId}`);
+export const getMovieById = async (movie_id) => {
+  const { data } = await moviesInstance.get(`/movie/${movie_id}`);
   return data;
 };
 
-export const getMovieCredits = async (movieId) => {
-  const { data } = await moviesInstance.get(`/movies/${movieId}/credits`);
-  return data;
+export const getMovieCredits = async (movie_id) => {
+  const { data } = await moviesInstance.get(`/movie/${movie_id}/credits`);
+  return data.cast;
 };
-export const getMovieReviews = async (movieId) => {
-  const { data } = await moviesInstance.get(`/movies/${movieId}/reviews`);
-  return data;
+export const getMovieReviews = async (movie_id) => {
+  const { data } = await moviesInstance.get(`/movie/${movie_id}/reviews`);
+  return data.results;
 };
-
-

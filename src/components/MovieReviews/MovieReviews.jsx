@@ -4,7 +4,7 @@ import { getMovieReviews } from "../../api/movies";
 import Loader from "../Loader/Loader";
 
 const MovieReviews = () => {
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { movieId } = useParams();
@@ -13,10 +13,10 @@ const MovieReviews = () => {
     const fetchReview = async () => {
       if (!movieId) return;
       setLoading(true);
-      setError(false);
+      setError(null);
       try {
-        const requestData = await getMovieReviews(movieId);
-        setReviews(requestData);
+        const reviewsData = await getMovieReviews(movieId);
+        setReviews(reviewsData);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -30,10 +30,10 @@ const MovieReviews = () => {
     <div>
       {loading && <Loader />}
       {error && <p>{error.message}</p>}
-      {reviews !== null ? (
+      {reviews.length > 0 ? (
         <ul>
           {reviews.map((review) => (
-            <li key={review.id}>
+            <li key={review.review_id || review.id}>
               <p>
                 <strong>Author:</strong> {review.author}
               </p>
